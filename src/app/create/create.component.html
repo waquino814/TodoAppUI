@@ -13,11 +13,11 @@
     </select>
   </div>
   <button (click)="additionalInfo = !additionalInfo" type="button" class="btn btn-link">
-        <span [hidden]="additionalInfo">More Details</span>
-        <span [hidden]="!additionalInfo">Less Details</span>
+        <span *ngIf="!additionalInfo">More Details</span>
+        <span *ngIf="additionalInfo">Less Details</span>
     </button>
 
-  <div [hidden]="!additionalInfo">
+  <div *ngIf="additionalInfo">
     <app-optional [createForm]="createForm"></app-optional>
     <app-additional-details (formReady)="formInitialized('additional', $event)"></app-additional-details>
   </div>
