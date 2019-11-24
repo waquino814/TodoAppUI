@@ -1,0 +1,26 @@
+<form class="form-group" [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="">Name:</label>
+    <input formControlName="name" type="text" name="name" id="" class="form-control" placeholder=""
+      aria-describedby="helpId">
+  </div>
+  <div class="form-group">
+    <label for="">Category</label>
+    <select formControlName="category" name="category" class="form-control">
+      <option value="">Select</option>
+      <option value="Rep">Rep</option>
+      <option value="Cat2">Cat2</option>
+    </select>
+  </div>
+  <button (click)="additionalInfo = !additionalInfo" type="button" class="btn btn-link">
+        <span [hidden]="additionalInfo">More Details</span>
+        <span [hidden]="!additionalInfo">Less Details</span>
+    </button>
+
+  <div [hidden]="!additionalInfo">
+    <app-optional [createForm]="createForm"></app-optional>
+    <app-additional-details (formReady)="formInitialized('additional', $event)"></app-additional-details>
+  </div>
+  <button class="btn btn-primary" type="submit" [disabled]="!createForm.valid">Add Task</button>
+</form>
+<br>
