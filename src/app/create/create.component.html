@@ -1,26 +1,41 @@
 <form class="form-group" [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="">Name:</label>
-    <input formControlName="name" type="text" name="name" id="" class="form-control" placeholder=""
-      aria-describedby="helpId">
+<div class="col-md-10">
+  <div class="card p-4">
+      <div class="card-body">
+          <h3 class="text-center">Add New Task</h3>
+          <hr>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group">
+                      <input formControlName="name" type="text" class="form-control" placeholder="Name">
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="form-group">
+                    <select formControlName="category" name="category" class="form-control">
+                      <option value="">Select Category</option>
+                      <option value="Rep">Rep</option>
+                      <option value="Cat2">Cat2</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="col-md-12">
+                <button (click)="additionalInfo = !additionalInfo" type="button" class="btn btn-link">
+                  <span *ngIf="!additionalInfo"> <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>More Details</span>
+                  <span *ngIf="additionalInfo"> <i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>Less Details</span>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="additionalInfo">
+          <app-additional-details (formReady)="formInitialized('additional', $event)"></app-additional-details>
+          <app-optional [createForm]="createForm"></app-optional>
+        </div>
+          <div class="row">
+              <div class="col-md-12 mt-1">
+                  <input type="submit" class="btn btn-outline-danger btn-block" [disabled]="!createForm.valid">
+              </div>
+          </div>
+      </div>
   </div>
-  <div class="form-group">
-    <label for="">Category</label>
-    <select formControlName="category" name="category" class="form-control">
-      <option value="">Select</option>
-      <option value="Rep">Rep</option>
-      <option value="Cat2">Cat2</option>
-    </select>
-  </div>
-  <button (click)="additionalInfo = !additionalInfo" type="button" class="btn btn-link">
-        <span *ngIf="!additionalInfo">More Details</span>
-        <span *ngIf="additionalInfo">Less Details</span>
-    </button>
-
-  <div *ngIf="additionalInfo">
-    <app-optional [createForm]="createForm"></app-optional>
-    <app-additional-details (formReady)="formInitialized('additional', $event)"></app-additional-details>
-  </div>
-  <button class="btn btn-primary" type="submit" [disabled]="!createForm.valid">Add Task</button>
+</div>
 </form>
-<br>

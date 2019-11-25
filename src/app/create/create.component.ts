@@ -44,6 +44,7 @@ export class CreateComponent implements OnInit {
     const task = new Task(this.createForm.value.name);
     task.category = this.createForm.value.category;
     this.listService.add(task);
+    this.createForm.reset();
   }
 }
 interface Category {
